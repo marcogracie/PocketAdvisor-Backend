@@ -3,6 +3,8 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from decouple import config
+import requests
+import json
 
 app = Flask(__name__)
 cred = credentials.Certificate('/Users/marcogracie/Documents/Personal/Code/StockMarketApp/PocketAdvisor-Backend/pocket-advisor-d79c2-firebase-adminsdk-23bkk-d0397417ea.json')
@@ -34,7 +36,7 @@ def main_page():
             "name": name,
             "username": username,
             "password": password,
-            "token": access_token
+            "token": access_token,
             "polygonToken": polygon_data["id"]
         }
 
