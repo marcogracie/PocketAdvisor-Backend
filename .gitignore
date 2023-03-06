@@ -1,3 +1,4 @@
 venv
 __pycache__
 pocket-advisor-d79c2-firebase-adminsdk-23bkk-d0397417ea
+.env
