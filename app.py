@@ -9,7 +9,7 @@ import json
 app = Flask(__name__)
 cred = credentials.Certificate('/Users/marcogracie/Documents/Personal/Code/StockMarketApp/PocketAdvisor-Backend/pocket-advisor-d79c2-firebase-adminsdk-23bkk-d0397417ea.json')
 
-app = firebase_admin.initialize_app(cred)
+application = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
