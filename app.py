@@ -21,7 +21,7 @@ client_secret = config('secret_key', default='')
 @app.route("/main", methods=['GET', 'POST'])
 def main_page():
     if request.method == "GET":
-        return render_template("signup.html")
+        return render_template("/Users/marcogracie/Documents/Personal/Code/StockMarketApp/PocketAdvisor-Backend/signup.html")
     if request.method == "POST":
         # this is where we submit to database
         code = request.args.get('code')
