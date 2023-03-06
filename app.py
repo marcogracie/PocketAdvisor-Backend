@@ -1,11 +1,15 @@
-import os
 from flask import Flask
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 
 app = Flask(__name__)
-env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
-app.config.from_object(env_config)
+cred = credentials.Certificate('/Users/marcogracie/Documents/Personal/Code/StockMarketApp/PocketAdvisor-Backend')
 
-@app.route("/main")
+app = firebase_admin.initialize_app(cred)
+
+db = firestore.client()
+
+@app.route("/main", methods=['GET', 'POST'])
 def index():
-    secret_key = app.config.get("SECRET_KEY")
-    return f"The configured secret key is {secret_key}"
+    
