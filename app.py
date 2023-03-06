@@ -13,7 +13,7 @@ app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-client_code = c2dc99c563f2b980bdb3895065b25c38
+client_code = "c2dc99c563f2b980bdb3895065b25c38"
 client_secret = config('secret_key', default='')
 
 @app.route("/main", methods=['GET', 'POST'])
