@@ -25,8 +25,8 @@ def main_page():
         return render_template("signup.html")
     if request.method == "POST":
         # this is where we submit to database
-        code = request.args.get('code')
-        app.logger.info(request.args)
+        code = request.arg.GET.get('?code')
+        app.logger.info(code)
         name = request.form["name"]
         username = request.form["username"]
         password = request.form["password"]
