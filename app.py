@@ -26,12 +26,14 @@ def main_page():
     if request.method == "POST":
         # this is where we submit to database
         code = request.args.get('code')
+        app.logger.info(request.args)
         name = request.form["name"]
         username = request.form["username"]
         password = request.form["password"]
         head = {"Content-Type" : "application/x-www-form-urlencoded"}
         data = {"grant_type": "authorization_code", "code" : code, "client_id": client_code, "client_secret": client_secret, "redirect_uri": "http://127.0.0.1:5000/main"}
         access_data = requests.post("https://api.alpaca.markets/oauth/token", data = data, headers = head)
+        app.logger.info(access_data)
         access_token = json.loads(access_data.text)["access_token"]
         head = {"Authorization": "Bearer " + access_token}
         polygon_data = json.loads(requests.get("https://api.alpaca.markets/oauth/token", headers=head).text)
