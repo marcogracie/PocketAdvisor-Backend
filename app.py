@@ -38,13 +38,13 @@ client_secret = config('secret_key', default='')
 
 @app.route('/main', methods=['GET', 'POST'])
 def main_page():
+    code = ""
     if request.method == "GET":
+        code = request.args.get('code')
+        app.logger.info(code)
         return render_template("signup.html")
     if request.method == "POST":
         # this is where we submit to database
-        code = request.args.get('code')
-        app.logger.info(request.url)
-       # app.logger.info(code.text)
         name = request.form["name"]
         username = request.form["username"]
         password = request.form["password"]
