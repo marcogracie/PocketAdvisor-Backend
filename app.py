@@ -7,6 +7,23 @@ from firebase_admin import firestore
 from decouple import config
 import requests
 import json
+from logging.config import dictConfig
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 
 app = Flask(__name__)
 cred = credentials.Certificate('/Users/marcogracie/Documents/Personal/Code/StockMarketApp/PocketAdvisor-Backend/pocket-advisor-d79c2-firebase-adminsdk-23bkk-d0397417ea.json')
@@ -19,14 +36,15 @@ client_code = "c2dc99c563f2b980bdb3895065b25c38"
 client_secret = config('secret_key', default='')
 
 
-@app.route("/main", methods=['GET', 'POST'])
+@app.route('/main', methods=['GET', 'POST'])
 def main_page():
     if request.method == "GET":
         return render_template("signup.html")
     if request.method == "POST":
         # this is where we submit to database
-        code = request.arg.GET.get('?code')
-        app.logger.info(code)
+        code = request.args.get('code')
+        app.logger.info(request.url)
+       # app.logger.info(code.text)
         name = request.form["name"]
         username = request.form["username"]
         password = request.form["password"]
