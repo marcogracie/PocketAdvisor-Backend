@@ -67,4 +67,17 @@ def main_page():
 
         db.collection('tokens').document(access_token).set(userData)
         return "Signup Finished. Please navigate back to the app and login!"
+
+@app.route('/verifyUser')
+def authenticateUser():
+    username = request.args.get('username')
+    password = request.args.get('password')
+    accounts = db.collection('tokens').get()
+    token = "No Token Found"
+    #TODO: there may be a better way of doing this
+    for account in accounts.each():
+        if account.val()["username"] == username and account.val()["password"] == password:
+            token = account.val()["token"] + "|" + account.val()["polygonToken"]
+
+    return token
     
