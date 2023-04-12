@@ -75,9 +75,9 @@ def authenticateUser():
     accounts = db.collection('tokens').get()
     token = "No Token Found"
     #TODO: there may be a better way of doing this
-    for account in accounts.each():
-        if account.val()["username"] == username and account.val()["password"] == password:
-            token = account.val()["token"] + "|" + account.val()["polygonToken"]
+    for account in accounts:
+        if account.get("username") == username and account.get("password") == password:
+            token = account.get("username") + "|" + account.get("password")
 
     return token
     
